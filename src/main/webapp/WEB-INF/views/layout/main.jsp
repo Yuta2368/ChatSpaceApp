@@ -14,6 +14,14 @@
 			<a href="<c:url value='/topics/index' />">Chat Space App.</a>
 		</h1>
 	</div>
+	
+	<c:if test="${user != null}">
+		<div id="user-info">
+			<span class="user">ユーザ：<c:out value="${user.name}" /></span>
+			<a class="logout" href="<c:url value='/logout' />" >logout</a>
+		</div>
+	</c:if>
+	
 	<div id="content">
 		${param.content}
 	</div>

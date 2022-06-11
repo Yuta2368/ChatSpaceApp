@@ -20,7 +20,7 @@ public class TopicsIndex extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-		List<Topic> topics = entityManager.createQuery("SELECT t FROM Topic t", Topic.class).getResultList();  
+		List<Topic> topics = entityManager.createQuery("SELECT t FROM Topic t ORDER BY t.createdAt DESC", Topic.class).getResultList();  
 		
 		entityManager.close();
 		

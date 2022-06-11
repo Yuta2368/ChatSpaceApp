@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "topics")
@@ -17,20 +20,22 @@ public class Topic {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column(name = "title", nullable = false)
+	private String title;
+	
+	@Lob
 	@Column(name = "description", nullable = false)
 	private String description;
 
 	@Column(name = "commentNum", nullable = false)
-	private String commentNum;
+	private Integer commentNum;
 	
 	@Column(name = "createdAt", nullable = false)
 	private Timestamp createdAt;
-
-	@Column(name = "updatedAt", nullable = false)
-	private Timestamp updatedAt;
-
-	@Column(name = "isDeleted", nullable = false)
-	private Integer isDeleted;
+	
+	@ManyToOne
+	@JoinColumn(name = "user", nullable = false)
+	private User user;
 
 	public Integer getId() {
 		return id;
@@ -38,6 +43,14 @@ public class Topic {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {
@@ -48,11 +61,11 @@ public class Topic {
 		this.description = description;
 	}
 
-	public String getCommentNum() {
+	public Integer getCommentNum() {
 		return commentNum;
 	}
 
-	public void setCommentNum(String commentNum) {
+	public void setCommentNum(Integer commentNum) {
 		this.commentNum = commentNum;
 	}
 
@@ -64,20 +77,12 @@ public class Topic {
 		this.createdAt = createdAt;
 	}
 
-	public Timestamp getUpdatedAt() {
-		return updatedAt;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUpdatedAt(Timestamp updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public Integer getIsDeleted() {
-		return isDeleted;
-	}
-
-	public void setIsDeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

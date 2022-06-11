@@ -20,6 +20,13 @@ public class CommentsNew extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("_token", request.getSession().getId());
+		request.setAttribute("topicId", request.getParameter("topicId"));
+		
+		if(request.getSession().getAttribute("errors") != null) {
+            request.setAttribute("errors", request.getSession().getAttribute("errors"));
+            request.getSession().removeAttribute("errors");
+        }
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/comments/new.jsp");
         rd.forward(request, response);
